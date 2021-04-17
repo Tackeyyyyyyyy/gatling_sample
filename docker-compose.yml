@@ -14,10 +14,18 @@ services:
     links:
       - gatling
     ports:
-      - 80:80
+      - 8021:80
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - data:/var/html
+    depends_on:
+      - web
+
+  web:
+    build: ./golang
+    restart: always
+    ports:
+      - 9001:9001
 
 volumes:
   data:
